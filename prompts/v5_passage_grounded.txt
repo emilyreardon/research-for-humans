@@ -1,0 +1,26 @@
+# version: v5_passage_grounded
+# description: v4_anchored_form with strengthened passage grounding. Keeps every rule
+# from v4 (length, closing question, no meta-commentary, tension as backbone) and adds:
+# passages supply the concrete image, setting, and vocabulary so the card is unmistakably
+# about the questioner's subject; passages never supply assertable facts or findings.
+# author: hand-authored
+The tension below has already been identified from the corpus. Speak from this relation. Do not search the passages for a different one.
+
+The two poles you are given are the backbone of the card. The card must turn on the tension between them, and that tension is the only thing the card asserts.
+
+Compress this specific relation, not a general truth it illustrates. If a reader struck this relation from what you write, nothing should remain standing.
+
+The passages tell you what this question is about. Draw the card's concrete image, setting, and vocabulary from the passages, so the card is unmistakably about the questioner's subject rather than a general statement that could answer any question.
+
+You must not name any study, author, paper, or dataset, and you must not state any specific finding, result, number, percentage, method, or experimental detail taken from the passages. The passages give you subject matter and language only — never facts to assert. If a passage reports what a study found, you may borrow its topic and its words, never its result.
+
+End with a question that does work the opening did not.
+
+Write in plain language that a non-specialist could follow on a single read, while keeping the oracle's voice.
+
+Never refer to the card, the research, the sources, or your own writing. Do not describe what you are doing. Only speak.
+
+{tension}
+VISITOR QUESTION: {question}
+PASSAGES:
+{passages}

@@ -1,0 +1,203 @@
+RESEARCH FOR HUMANS — SEARCH & SYNTHESIS
+How the system retrieves from the corpus and formulates a response
+2026-05-28
+======================================================================
+
+
+WHAT THIS IS
+-------------
+This document specifies the intent and policy behind retrieval and synthesis —
+not just the technical parameters. It is the authoritative guide to how the
+system selects what to surface and how to use it.
+
+
+THE CORPUS
+-----------
+Source:         repository.isls.org — open-access ISLS conference proceedings
+Papers:         7,463 ISLS papers
+Chunk count:    74,330 documents in ChromaDB (full PDF text chunks)
+Coverage:       CSCL, ICLS, and related ISLS venues
+Text type:      Full PDF text extracted and indexed — not abstracts only.
+                Each paper is chunked so retrieval can surface specific
+                findings, methods, and cited works from inside the paper.
+
+Embedding model: nomic-embed-text (local via Ollama)
+Vector store:    ChromaDB, local, cosine similarity
+
+
+RETRIEVAL — WHAT GETS PULLED
+------------------------------
+N_REFS:         20 chunks retrieved per question (for /refs lit-review page)
+N_RESULTS:      7 of those chunks passed to the model (token budget)
+Similarity:     cosine (ChromaDB default via nomic-embed-text)
+Chunk cap:      700 characters per chunk (MAX_CHUNK_CHARS)
+                This cap prevents OLMo2's 4,096-token context window from
+                being exceeded. Total context passed to model: ~5,000–7,000
+                characters (~1,200–1,800 tokens).
+
+Context format passed to model:
+  "[Authors] ([Year]), [Title]:
+  [chunk text up to 700 chars]
+  ---
+  [next chunk...]"
+
+
+PAPER SELECTION — WHAT GETS CITED
+-----------------------------------
+Label citation: Up to 3 unique papers (MAX_CITATIONS) from the top 7 model chunks
+/refs page:     All unique papers from all 20 retrieved chunks (N_REFS)
+Deduplication:  By title — multiple chunks from the same paper count as one
+
+Intent: The top similarity chunks are the most semantically proximate to the
+visitor's question. The label cites the top 3 for brevity; the /refs page
+shows the full breadth of what was retrieved so visitors can read the sources.
+
+No other selection criteria are currently applied. Papers are not filtered by
+date, methodology, author, or venue.
+
+
+RELEVANCE AND NO-MATCH HANDLING
+---------------------------------
+Relevance threshold: None currently set. ChromaDB returns the N nearest
+chunks regardless of similarity score. There is no floor below which the
+system refuses to retrieve.
+
+No-match policy: If the query returns chunks with very low similarity — that
+is, the corpus genuinely has nothing close to the question — the model will
+receive evidence that is not relevant. The system prompt instructs the model
+to surface what the evidence contains, not what the question asks for. In
+practice this means a question outside the learning sciences domain will
+produce a card grounded in whatever the corpus does contain, which may be
+an honest displacement.
+
+The system will not generate a response without corpus evidence. If ChromaDB
+is unavailable, the system returns no response.
+
+Hard refusal: If no relevant papers are returned (empty result), the system
+logs the failure and returns nothing to the visitor.
+
+
+SYNTHESIS — HOW THE MODEL USES THE EVIDENCE
+---------------------------------------------
+The model does not summarize. It does not report findings. It reads the
+retrieved chunks for the tension, contradiction, recurrence, or absence
+that is most generative — the thing that is not obvious from within the
+material.
+
+The model frames references speculatively:
+  "work that seems to circle"
+  "a paper that may be asking"
+  "research that keeps returning to"
+
+This framing is intentional. It signals that the card is an interpretation,
+not a finding. It preserves the visitor's right to go read the source.
+
+Synthesis rules:
+  - Use the evidence. Do not generate claims without grounding.
+  - Do not anchor the entire card on one paper if multiple papers are
+    retrieved. The synthesis should move across the evidence.
+  - Surface what the evidence holds in tension with itself, not just
+    what it says.
+  - If the retrieved papers disagree or use the same term differently,
+    that disagreement is the response.
+  - If the retrieved papers all circle a problem without naming it, the
+    absence of a name is the response.
+
+
+HOW THE FOUR RESPONSE MODES RELATE TO RETRIEVAL
+-------------------------------------------------
+The response mode is selected after retrieval, based on what the evidence shows.
+
+  CONTRADICTION AND ABSENCE
+  Use when retrieved chunks from different papers pull in different directions
+  on the same concept. The retrieval has surfaced a genuine disagreement in
+  the corpus. Do not resolve it.
+
+  RECURRENCE WITHOUT RESOLUTION
+  Use when multiple retrieved chunks across different years or communities
+  return to the same problem. The retrieval has shown a pattern. Name the
+  pattern, not the papers.
+
+  ATEMPORAL READING FOR ABSENCE
+  Use when the retrieved chunks gesture toward a center that none of them
+  name directly. The retrieval has produced a cloud around something. Name
+  the thing at the center that is missing.
+
+  METHODOLOGICAL CONTRADICTION
+  Use when retrieved chunks reveal a gap between what a study did and what
+  it claims. The retrieval has surfaced a methodological tension. Hold the
+  gap open.
+
+
+ANTI-HALLUCINATION RULES
+--------------------------
+The system will not generate a citation. Citations are drawn from retrieved
+metadata (author, year, title, handle URL), not generated by the model.
+
+The model generates only the card body. The citation line is assembled from
+metadata and appended by the system after generation.
+
+The model must not fabricate author names, paper titles, findings, or years.
+All claims in the card body must be grounded in the retrieved chunks.
+
+If the model generates text that cannot be connected to anything in the
+retrieved evidence, that text should not be in the card.
+
+
+PARAMETERS (technical, as implemented)
+----------------------------------------
+Embedding model:    nomic-embed-text via Ollama (http://localhost:11434)
+Vector store:       ChromaDB PersistentClient, ./chroma_db
+Collection:         isls_papers
+Query method:       col.query(query_embeddings=[embedding], n_results=max(N_RESULTS, N_REFS))
+N_REFS:             20  (total chunks retrieved; all unique papers go to /refs page)
+N_RESULTS:          7   (chunks passed to OLMo2; constrained by 4096-token window)
+MAX_CHUNK_CHARS:    700
+Papers cited:       min(3, unique titles in top N_RESULTS) — label only
+Language model:     OLMo2 7B (olmo2 via Ollama)
+Context window:     4,096 tokens
+Temperature:        Ollama default (~0.8) — not explicitly set
+num_predict:        Not set — model generates until it stops
+Streaming:          True (SSE to browser)
+Timeout:            180 seconds
+
+
+KNOWN GAPS IN THIS POLICY
+---------------------------
+The following are not yet specified as policy:
+
+  - No similarity score threshold — system cannot currently distinguish
+    a strong match from a weak one.
+  - No date weighting — a 2006 paper ranks the same as a 2024 paper if
+    cosine similarity is equal.
+  - No venue weighting — CSCL, ICLS, and other ISLS venues are treated
+    identically.
+  - Citation selection (first 3 unique titles from top 7) is a technical
+    default, not a deliberate editorial policy.
+  - No cross-session deduplication — the same paper can be cited in
+    consecutive responses if retrieval surfaces it again.
+
+These gaps are named here as design decisions yet to be made, not as errors.
+
+
+======================================================================
+APP CONFIGURATION — loaded by app.py at startup
+Edit values only. Do not rename keys or remove the delimiter lines.
+======================================================================
+
+[CONFIG]
+# Total chunks retrieved from ChromaDB per question (for /refs lit-review page)
+N_REFS = 20
+
+# Chunks passed to the model (must stay within OLMo2's 4096-token context window)
+N_RESULTS = 7
+
+# Maximum characters per retrieved chunk
+MAX_CHUNK_CHARS = 700
+
+# Hard character limit on the oracle card body (not counting the citation line)
+MAX_RESPONSE_CHARS = 480
+
+# Maximum unique papers cited on the printed label
+MAX_CITATIONS = 3
+[END CONFIG]

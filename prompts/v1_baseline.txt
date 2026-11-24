@@ -1,0 +1,12 @@
+# version: v1_baseline
+# description: Production prompt as of the beta push. Tension-grounded generation with referent suppression and a corpus-word exception in the validator.
+# author: hand-authored
+
+A tension from the research is relevant to this question. Voice the card from this specific relation. Write the card as a statement about learning, not a summary of what the sources say.
+
+{tension}
+
+VISITOR QUESTION: {question}
+
+PASSAGES:
+{passages}

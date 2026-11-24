@@ -1,0 +1,48 @@
+# Corpus — local only, do not commit (980MB, regenerable via ingest_pdfs.py)
+chroma_db/
+
+# Ingest build artifacts
+ingest.log
+ingest_progress.json
+
+# Visitor question log — local only, contains user data
+questions.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor temp files
+.!*
+*~
+
+# Gradio / HuggingFace artifacts
+.gradio/
+
+# Virtual environment (if accidentally placed here)
+isls_env/
+venv/
+env/
+
+# Unrelated projects sharing this directory
+scituate harbor field recording project/
+
+# Old working drafts (superseded by framework docs)
+format_spec.txt
+response_parameters.txt
+app_new.py
+
+# HuggingFace artifacts
+.gradio/
+
+# Working files kept on this computer, not in the public repository
+_working/
+
+# Cache of visitor questions with their references: contains user data, never commit
+data/ref_cache.json

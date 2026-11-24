@@ -1,0 +1,17 @@
+# version: v2_tension_anchor
+# description: Anchors card to pre-computed tension; adds compression/deletion requirement.
+#
+# What is being tested: whether explicitly anchoring to the pre-computed tension and naming
+# the compression requirement produces cards whose aphoristic force is more specifically
+# grounded in the handed relation, compared to v1_baseline.
+# author: hand-authored
+The tension below has already been identified from the corpus. Do not compress the passages into a tension — compress this one.
+
+The aphoristic force of the card must be this specific relation, not a general truth it illustrates. If this tension were removed from the card, the card should fail to stand.
+
+The passages provide supporting evidence and concrete detail. They are not an alternative source of tension.
+
+{tension}
+VISITOR QUESTION: {question}
+PASSAGES:
+{passages}

@@ -1,0 +1,93 @@
+{
+  "version": "v1_8tensions",
+  "tensions": [
+    {
+      "id": "t1",
+      "type": "opposition",
+      "relation": "The difficulty of unsupported struggle is productive for some learners and harmful for others; the same effort that teaches one closes another.",
+      "claim_A": "Engaging learners in problem-solving before instruction improves conceptual understanding and transfer.",
+      "claim_B": "The same unsupported struggle produces anxiety and worse outcomes for some learners.",
+      "paper_A": "Kapur (productive failure)",
+      "paper_B": "Gashaj, Trninic & Formaz, When Failing Generates Math Anxiety Instead of Productivity",
+      "instance": "The student with no scaffold who shuts down instead of struggling productively.",
+      "example_question": "Why do I learn better when things are hard?"
+    },
+    {
+      "id": "t2",
+      "type": "convergence",
+      "relation": "Pushing thought out of the head — into the hand, or onto a shared surface — is what makes hard ideas learnable; two separate lines of work arrive at the same thing.",
+      "claim_A": "Externalizing reasoning into bodily action (gestural replay) carries mathematical ideas into transfer.",
+      "claim_B": "Externalizing reasoning into a shared representation changes what a group is able to reason about.",
+      "paper_A": "Xia et al., Embodied Transfer of Mathematical Ideas Through Gestural Replay",
+      "paper_B": "Suthers (representational affordances)",
+      "instance": "The learner who can only work a hard idea out once it is moved outside the head, into action alone, or into something a group holds in common.",
+      "example_question": "Why does explaining something out loud help me understand it?"
+    },
+    {
+      "id": "t3",
+      "type": "double-edge",
+      "relation": "The help that carries a learner through a problem is the same help that, never withdrawn, leaves them unable to begin the next one alone.",
+      "claim_A": "Scaffolds and worked examples improve immediate performance and lower cognitive load.",
+      "claim_B": "Fading support is what builds durable independence; support that never fades suppresses the work that learning requires.",
+      "paper_A": "Sweller (worked examples, cognitive load theory)",
+      "paper_B": "Wood, Bruner & Ross; Collins, Brown & Newman (scaffolding and fading)",
+      "instance": "The learner who follows the worked example perfectly, then cannot begin the next problem alone.",
+      "example_question": "When should I stop asking for help?"
+    },
+    {
+      "id": "t4",
+      "type": "scale_mismatch",
+      "relation": "What looks like a learner failing to steer themselves can be a group steering together; the competence is real but lives at the level of the group, not the person.",
+      "claim_A": "Individual self-regulation and metacognitive monitoring are primary drivers of learning outcomes.",
+      "claim_B": "In collaborative settings, regulatory work distributes across the group; what looks like individual failure to self-regulate may be effective shared regulation.",
+      "paper_A": "Zimmerman, Pintrich (self-regulated learning)",
+      "paper_B": "Hadwin, Jarvela, Miller (socially shared regulation of learning)",
+      "instance": "The student who seems unable to monitor their own progress but functions well in group work because the group is doing the monitoring.",
+      "example_question": "Why do I learn better with other people than on my own?"
+    },
+    {
+      "id": "t5",
+      "type": "incompatible_operationalization",
+      "relation": "What we call being engaged names two different states — staying fixed on a task and never ceasing to question it — and they can pull in opposite directions.",
+      "claim_A": "Engagement as time-on-task and behavioral persistence predicts learning outcomes.",
+      "claim_B": "Engagement as cognitive depth predicts different outcomes; a learner can be behaviorally engaged but cognitively passive.",
+      "paper_A": "Fredricks, Blumenfeld & Paris (multidimensional engagement)",
+      "paper_B": "Chi (ICAP: interactive, constructive, active, passive)",
+      "instance": "The student who completes every task on time but never constructs anything new.",
+      "example_question": "Why do my students seem engaged but still aren't learning?"
+    },
+    {
+      "id": "t6",
+      "type": "conditionality",
+      "relation": "Whether a difficulty helps depends entirely on who meets it; the same technique builds durable learning in one learner and only confusion in another.",
+      "claim_A": "Introducing difficulty into practice (spacing, interleaving, retrieval) impairs immediate performance but improves long-term retention and transfer.",
+      "claim_B": "The same difficulties harm learners without sufficient prior knowledge, adding load and producing frustration rather than learning.",
+      "paper_A": "Bjork (desirable difficulties)",
+      "paper_B": "Kalyuga (expertise reversal effect)",
+      "instance": "Interleaved practice that produces transfer for experienced learners produces only frustration for novices using the same materials.",
+      "example_question": "Why do some study techniques work for some people but not others?"
+    },
+    {
+      "id": "t7",
+      "type": "opposition",
+      "relation": "The mark that shows a learner where they stand is the same mark that stops them reading the guidance meant to move them forward.",
+      "claim_A": "Feedback focused on forward progress improves learning by giving learners actionable information about where they are.",
+      "claim_B": "The presence of grades shifts learners toward performance orientation; they read the grade rather than the guidance that came with it.",
+      "paper_A": "Black & Wiliam (formative assessment)",
+      "paper_B": "Butler; Kluger & DeNisi (feedback intervention theory)",
+      "instance": "The student who looks at the grade and turns the page.",
+      "example_question": "Why do my students ignore my feedback?"
+    },
+    {
+      "id": "t8",
+      "type": "double-edge",
+      "relation": "The tool that lifts a task's burden takes with it the effort that would have built the skill to do the task alone.",
+      "claim_A": "Cognitive offloading tools free attention for higher-order thinking by reducing the burden of low-level operations.",
+      "claim_B": "The same offloading removes the effortful processing that builds durable skill; fluency requires the practice the tool replaces.",
+      "paper_A": "Risko & Gilbert (cognitive offloading)",
+      "paper_B": "Bjork (desirable difficulties); Sweller (worked-example fade)",
+      "instance": "The student who writes stronger essays with assistance but cannot begin one alone.",
+      "example_question": "Is using AI to help me write making me a worse writer?"
+    }
+  ]
+}

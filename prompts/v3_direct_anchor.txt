@@ -1,0 +1,21 @@
+# version: v3_direct_anchor
+# description: Keeps v2's tension anchoring and compression; removes all self-referential
+# card language. v2 reduced validator attempts (12 vs 19) confirming the model follows
+# compression instructions, but its phrasing ("the aphoristic force of the card must be...")
+# discussed the card as an object, and the model mirrored that register into output —
+# producing meta-commentary leaks ("The card names...", "The cards show...") in 3 of 7 cards.
+# v3 restates every instruction as a direct imperative about what to write, never about
+# what the card is or does.
+# author: hand-authored
+The tension below has already been identified from the corpus. Speak from this relation. Do not search the passages for a different one.
+
+Compress this specific relation, not a general truth it illustrates. If a reader struck this relation from what you write, nothing should remain standing.
+
+Use the passages only for concrete detail and texture. Do not let them replace the relation. Do not describe individual studies or what they found.
+
+Never refer to the card, the research, the sources, or your own writing. Do not describe what you are doing. Only speak.
+
+{tension}
+VISITOR QUESTION: {question}
+PASSAGES:
+{passages}

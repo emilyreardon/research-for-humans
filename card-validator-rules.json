@@ -1,0 +1,28 @@
+{
+  "_about": "Mechanizable validation rules for Research for Humans cards. The app ALREADY enforces two of these in app.py: _enforce_format coerces banned punctuation (parens, semicolons, colons, dashes) and _truncate_reply holds the 480-character limit. It does NOT check banned words. So the live new contribution of this file is banned_terms. The punctuation and length rules are kept here as the documented spec and for any future validate-and-regenerate step. Voice, register, and the banned structures and rhetorical moves are human-judgment criteria and live in card-style-guide.md, not here.",
+
+  "max_characters": 480,
+  "max_characters_note": "Counts the full card text including both paragraphs and the blank line between them. Does NOT count the citation line, which the app appends after generation.",
+
+  "banned_punctuation": ["\u2014", "\u2013", ":", ";", "(", ")", "!"],
+  "banned_punctuation_note": "Listed marks are em-dash, en-dash, colon, semicolon, open paren, close paren, exclamation mark. The ellipsis is also banned: treat as either the single character \u2026 or two or more consecutive periods. Implement this as a check for the PRESENCE of any banned mark, not as a whitelist of allowed marks. A whitelist of only period, comma, and question mark would wrongly reject apostrophes, which valid cards use in contractions and possessives.",
+
+  "banned_terms": [
+    "reveals", "shows", "demonstrates", "highlights", "underscores", "illustrates",
+    "explores", "examines", "investigates", "addresses", "focuses", "centers",
+    "importantly", "notably", "significantly", "clearly", "obviously", "certainly",
+    "understanding", "insight", "finding", "suggest", "suggests", "indicate", "indicates", "imply", "implies",
+    "this research", "the research", "the study", "the findings", "the data", "the results",
+    "the card", "the cards",
+    "these papers", "this passage", "the passages", "concrete detail", "specific detail",
+    "a single passage", "single passage", "passage records",
+    "the detail comes", "the tension lies", "the tension is",
+    "impact", "challenge", "navigate", "delve", "harness", "illuminate", "facilitate",
+    "bolster", "tapestry", "realm", "beacon", "cacophony", "intricate", "palpable",
+    "quietly", "named", "nestled", "vibrant", "foster", "innovative", "transformative",
+    "seamless", "robust", "nuanced", "vital", "crucial", "pivotal", "name"
+  ],
+  "banned_terms_note": "Match case-insensitive, on whole words and whole phrases (word boundaries), never on substrings. Whole-word matching is required so that 'name' does not fire on 'names' or 'nameless'. The list now includes the third-person present forms suggests, indicates, and implies alongside their base forms. The past and gerund forms (suggested, suggesting, indicated, indicating, implied, implying) are still not listed. If you want those caught too, either add them here or apply light stemming to these three verbs, and document whichever you choose.",
+
+  "on_failure": "Punctuation and length are already handled in-app by coercion and truncation, not rejection, which is reasonable for a live installation that should not fail a card over a stray colon. Banned words cannot be coerced without breaking grammar, so enforce them by discarding the card and regenerating, which pairs naturally with best-of-N sampling where failing candidates are simply dropped. In the interim, logging banned terms for human review is enough. A short delay before reprinting reads as the automaton thinking and is acceptable."
+}

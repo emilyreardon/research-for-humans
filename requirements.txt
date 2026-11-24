@@ -1,0 +1,4 @@
+chromadb==1.5.9
+Pillow==12.2.0
+qrcode==8.2
+requests==2.33.1

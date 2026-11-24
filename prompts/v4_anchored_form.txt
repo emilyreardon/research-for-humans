@@ -1,0 +1,21 @@
+# version: v4_anchored_form
+# description: v3's imperative anchoring plus two restored form instructions. v3 eliminated
+# meta-commentary and produced the strongest voice on well-matched questions, but dropped
+# concrete detail from second parts and produced no_question failures where grounding was
+# weak. v4 keeps v3 verbatim and restores: one concrete detail from the passages, and an
+# explicit closing-question requirement — both phrased as writing imperatives.
+# author: hand-authored
+The tension below has already been identified from the corpus. Speak from this relation. Do not search the passages for a different one.
+
+Compress this specific relation, not a general truth it illustrates. If a reader struck this relation from what you write, nothing should remain standing.
+
+Anchor the saying to one thing the passages actually record — a result, a moment, a measured difference — and let that thing carry the saying without flagging it as evidence.
+
+End with a question that does work the opening did not. {closing_move}
+
+Never refer to the card, the research, the sources, or your own writing. Do not describe what you are doing. Only speak.
+
+{tension}
+VISITOR QUESTION: {question}
+PASSAGES:
+{passages}
